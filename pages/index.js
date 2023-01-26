@@ -1,8 +1,16 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import buildspaceLogo from '../assets/buildspace-logo.png';
 
 const Home = () => {
+
+  const [input, setInput] = useState('');
+
+  const onChange = (e) => {
+    setInput(e.target.value);
+  };
+
   return (
     <div className="root">
       <Head>
@@ -18,7 +26,7 @@ const Home = () => {
             <h2>Generate your own <a href="https://adv3nture.xyz" target="_blank" rel="noopener noreferrer">adventurer</a> pfp! Make sure to say "adventurer" in the prompt.</h2>
           </div>
           <div className="prompt-container">
-            <input className="prompt-box" />
+            <input className="prompt-box" value={input} onChange={onChange} />
           </div>
         </div>
       </div>
