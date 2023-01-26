@@ -6,13 +6,39 @@ import buildspaceLogo from '../assets/buildspace-logo.png';
 const Home = () => {
 
   const [input, setInput] = useState('');
+  const [img, setImg] = useState(''); 
 
   const onChange = (e) => {
     setInput(e.target.value);
   };
 
   const generateAction = async () => {
-    console.log('Generating...');	
+    // Add the fetch request
+    const response = await fetch('/api/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'image/jpeg',
+      },
+      body: JSON.stringify({ input }),
+    });
+
+    const data = await response.json();
+
+    // If model still loading, drop that retry time
+    if (response.status === 503) {
+      console.log('Model is loading still :(.')
+      return;
+    };
+
+    // If another error, drop error
+    if (!response.ok) { // ok == 200
+      console.log(`Error: ${data.error}`);
+      return;
+    };
+
+    // Set image data into state property
+    setImg(data.image);
+    
   };
 
   return (
