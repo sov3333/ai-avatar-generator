@@ -13,12 +13,20 @@ const Home = () => {
   const [retry, setRetry] = useState(0);
   // Number of retries left
   const [retryCount, setRetryCount] = useState(maxRetries);
+  // Add isGenerating state
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const onChange = (e) => {
     setInput(e.target.value);
   };
 
   const generateAction = async () => {
+    // Add this check to make sure there is no double click
+    if (isGenerating && retry === 0) return;
+
+    // Set loading has started
+    setIsGenerating(true);
+
     // If this is a retry request, take away retryCount
     if (retry > 0) {
       setRetryCount((prevState) => {
@@ -53,11 +61,16 @@ const Home = () => {
     // If another error, drop error
     if (!response.ok) { // ok == 200
       console.log(`Error: ${data.error}`);
+      // Stop loading
+      setIsGenerating(false);
       return;
     };
 
     // Set image data into state property
     setImg(data.image);
+
+    // Everything is all done -- stop loading!
+    setIsGenerating(false);
 
   };
   
@@ -66,7 +79,7 @@ const Home = () => {
       setTimeout(resolve, ms);
     });
   };
-  
+
   useEffect(() => {
     const runRetry = async () => {
       if (retryCount === 0) {
@@ -106,9 +119,18 @@ const Home = () => {
           <div className="prompt-container">
             <input className="prompt-box" value={input} onChange={onChange} />
             <div className="prompt-buttons">
-              <a className="generate-button" onClick={generateAction}>
+              <a 
+                className={
+                  isGenerating ? 'generate-button loading' : 'generate-button'
+                }
+                onClick={generateAction}
+              >
                 <div className="generate">
-                  <p>Generate</p>
+                  {isGenerating ? (
+                    <span className="loader"></span>
+                  ) : (
+                    <p>Generate</p>
+                  )}
                 </div>
               </a>
             </div>
