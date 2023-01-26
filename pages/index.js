@@ -110,7 +110,6 @@ const Home = () => {
       <div className="container">
         <div className="header">
           <div className="header-title">
-            {/* <h1>Mainfest your adventurer</h1> */}
             <h1>Manifestooor 🧙</h1>
           </div>
           <div className="header-subtitle">
@@ -136,6 +135,11 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {img && (
+          <div className="output-content">
+            <Image src={img} width={512} height={512} alt={input} />
+          </div>
+        )}
       </div>
       <div className="badge-container grow">
         <a
