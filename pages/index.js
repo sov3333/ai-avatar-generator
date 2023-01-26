@@ -9,12 +9,10 @@ const Home = () => {
 
   const [input, setInput] = useState('');
   const [img, setImg] = useState(''); 
-  // Numbers of retries 
   const [retry, setRetry] = useState(0);
-  // Number of retries left
   const [retryCount, setRetryCount] = useState(maxRetries);
-  // Add isGenerating state
   const [isGenerating, setIsGenerating] = useState(false);
+  const [finalPrompt, setFinalPrompt] = useState('');
 
   const onChange = (e) => {
     setInput(e.target.value);
@@ -65,6 +63,11 @@ const Home = () => {
       setIsGenerating(false);
       return;
     };
+
+    // Set final prompt here
+    setFinalPrompt(input);
+    // Remove content from input box
+    setInput('');
 
     // Set image data into state property
     setImg(data.image);
@@ -138,6 +141,7 @@ const Home = () => {
         {img && (
           <div className="output-content">
             <Image src={img} width={512} height={512} alt={input} />
+            <p>{finalPrompt}</p>
           </div>
         )}
       </div>
