@@ -6,15 +6,19 @@ const Home = () => {
   return (
     <div className="root">
       <Head>
-        <title>AI Avatar Generator | buildspace</title>
+        <title>Anime-style Adventurer PFP Generator | Manifestooor by Adv3nture.xyz</title>
       </Head>
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>your generator one-liner</h1>
+            {/* <h1>Mainfest your adventurer</h1> */}
+            <h1>Manifestooor</h1>
           </div>
           <div className="header-subtitle">
-            <h2>description of your generator</h2>
+            <h2>Generate your own <a href="https://adv3nture.xyz" target="_blank" rel="noopener noreferrer">adventurer</a> pfp! Make sure to say "adventurer" in the prompt.</h2>
+          </div>
+          <div className="prompt-container">
+            <input className="prompt-box" />
           </div>
         </div>
       </div>
