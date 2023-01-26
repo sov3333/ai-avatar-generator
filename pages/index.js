@@ -11,6 +11,10 @@ const Home = () => {
     setInput(e.target.value);
   };
 
+  const generateAction = async () => {
+    console.log('Generating...');	
+  };
+
   return (
     <div className="root">
       <Head>
@@ -20,13 +24,20 @@ const Home = () => {
         <div className="header">
           <div className="header-title">
             {/* <h1>Mainfest your adventurer</h1> */}
-            <h1>Manifestooor</h1>
+            <h1>Manifestooor 🧙</h1>
           </div>
           <div className="header-subtitle">
             <h2>Generate your own <a href="https://adv3nture.xyz" target="_blank" rel="noopener noreferrer">adventurer</a> pfp! Make sure to say "adventurer" in the prompt.</h2>
           </div>
           <div className="prompt-container">
             <input className="prompt-box" value={input} onChange={onChange} />
+            <div className="prompt-buttons">
+              <a className="generate-button" onClick={generateAction}>
+                <div className="generate">
+                  <p>Generate</p>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
